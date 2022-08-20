@@ -1,5 +1,9 @@
 <template>
 	<view>
+		<!-- 搜索组件 -->
+		<view class="search-box">
+			<my-search @click="gotoSearch"></my-search>
+		</view>
 		<!-- 轮播图 -->
 		<swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000" :circular="true">
 			<swiper-item v-for="list in swiperList" :key="list.goods_id">
@@ -113,6 +117,11 @@
 				} else {
 					return uni.$showMsg()
 				}
+			},
+			gotoSearch() {
+				uni.navigateTo({
+					url: '/subpkg/search/search'
+				})
 			}
 		}
 	}
@@ -163,5 +172,12 @@
 		.right-img {
 			border-radius: 5%;
 		}
+	}
+
+	/* 吸顶样式设置 */
+	.search-box {
+		position: sticky;
+		top: 0;
+		z-index: 999;
 	}
 </style>

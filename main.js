@@ -31,6 +31,11 @@ uni.$showMsg = function(title = '数据请求失败！', duration = 1500) {
 	})
 }
 
+// 引入组件
+import mysearch from "@/component/my-search/my-search.vue"
+// 注册全局组件
+Vue.component('my-search', mysearch)
+
 Vue.config.productionTip = false
 
 App.mpType = 'app'

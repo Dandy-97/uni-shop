@@ -1,12 +1,16 @@
 <template>
 	<view>
+		<!-- 使用自定义的搜索组件 -->
+		<!-- <mysearch :bgcolor="'pink'" :radius="3"></mysearch> -->
+		<my-search @click="gotoSearch"></my-search>
+
 		<view class="scroll-view-container">
 			<!-- 左侧 -->
 			<scroll-view class="left-scroll-view" scroll-y="true" :style="{height: wh + 'px'}">
-				<template v-for="(item, index) in cateList" :key="item.cat_id">
+				<block v-for="(item, index) in cateList" :key="item.cat_id">
 					<view :class="['left-scroll-view-item', index === active ? 'active' : '']"
 						@click="activeChange(index)">{{item.cat_name}}</view>
-				</template>
+				</block>
 			</scroll-view>
 			<!-- 右侧 -->
 			<scroll-view scroll-y="true" :style="{height: wh + 'px'}" :scroll-top="scrollTop">
@@ -48,7 +52,7 @@
 		onLoad() {
 			// 调用小程序api获取手机相关信息
 			const sysInfo = uni.getSystemInfoSync();
-			this.wh = sysInfo.windowHeight;
+			this.wh = sysInfo.windowHeight - 50
 			this.getCateList()
 		},
 		methods: {
@@ -75,6 +79,11 @@
 			gotoGoodsList(item) {
 				uni.navigateTo({
 					url: '/subpkg/goods_list/goods_list?cid=' + item.cat_id
+				})
+			},
+			gotoSearch() {
+				uni.navigateTo({
+					url: '/subpkg/search/search'
 				})
 			}
 		},
